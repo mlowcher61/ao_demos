@@ -34,7 +34,9 @@
   workflow_mermaid: |
     flowchart LR
       A@{ img: "__ASSET__/assets/icons/manual-trigger.png", label: "CVE Alert", pos: "b", h: 96, constraint: "on" } --> B@{ img: "__ASSET__/assets/icons/task-agent.png", label: "AI Triage Agent", pos: "b", h: 96, constraint: "on" }
-      B --> C@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Route Decision", pos: "b", h: 96, constraint: "on" }
+      B --> P@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Any CVEs to Patch?", pos: "b", h: 96, constraint: "on" }
+      B --> Q@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Any to Investigate?", pos: "b", h: 96, constraint: "on" }
+      P -->|Yes| C@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Route Decision", pos: "b", h: 96, constraint: "on" }
       C -->|Auto-Patch Dev| D1@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Fetch & Commit to Gitea", pos: "b", h: 96, constraint: "on" }
       D1 --> D2@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Sync & Deploy via AAP", pos: "b", h: 96, constraint: "on" }
       D2 --> D3@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Run CVE Remediation", pos: "b", h: 96, constraint: "on" }
@@ -42,11 +44,10 @@
       E0 -->|Approved| E1@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Fetch & Commit to Gitea", pos: "b", h: 96, constraint: "on" }
       E1 --> E2@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Sync & Deploy via AAP", pos: "b", h: 96, constraint: "on" }
       E2 --> E3@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Run CVE Remediation", pos: "b", h: 96, constraint: "on" }
-      C -->|Investigate| F1@{ img: "__ASSET__/assets/icons/task-agent.png", label: "No Known Remediation", pos: "b", h: 96, constraint: "on" }
-      F1 --> F2@{ img: "__ASSET__/assets/icons/script-node.png", label: "Parse Investigation Result", pos: "b", h: 96, constraint: "on" }
-      F2 --> F3@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Notify Mattermost", pos: "b", h: 96, constraint: "on" }
+      Q -->|Yes| F1@{ img: "__ASSET__/assets/icons/task-agent.png", label: "No Known Remediation", pos: "b", h: 96, constraint: "on" }
+      F1 --> F3@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Notify Mattermost", pos: "b", h: 96, constraint: "on" }
       classDef noBorder fill:transparent,stroke:transparent
-      class A,B,C,D1,D2,D3,E0,E1,E2,E3,F1,F2,F3 noBorder
+      class A,B,P,Q,C,D1,D2,D3,E0,E1,E2,E3,F1,F3 noBorder
 
 - slug: disk-utilization
   title: Disk Utilization & Remediation
