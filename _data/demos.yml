@@ -33,7 +33,8 @@
   youtube_url: https://youtu.be/LD7faJXRpHM?si=l1ekXLwhLGdzQMEs
   workflow_mermaid: |
     flowchart LR
-      A@{ img: "__ASSET__/assets/icons/manual-trigger.png", label: "CVE Alert", pos: "b", h: 96, constraint: "on" } --> B@{ img: "__ASSET__/assets/icons/task-agent.png", label: "AI Triage Agent", pos: "b", h: 96, constraint: "on" }
+      A@{ img: "__ASSET__/assets/icons/manual-trigger.png", label: "CVE Alert", pos: "b", h: 96, constraint: "on" } --> K@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Check CVEs in Lightspeed", pos: "b", h: 96, constraint: "on" }
+      K --> B@{ img: "__ASSET__/assets/icons/task-agent.png", label: "AI Triage Agent", pos: "b", h: 96, constraint: "on" }
       B --> P@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Any CVEs to Patch?", pos: "b", h: 96, constraint: "on" }
       B --> Q@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Any to Investigate?", pos: "b", h: 96, constraint: "on" }
       P -->|Yes| C@{ img: "__ASSET__/assets/icons/switch-node.png", label: "Route Decision", pos: "b", h: 96, constraint: "on" }
@@ -47,7 +48,7 @@
       Q -->|Yes| F1@{ img: "__ASSET__/assets/icons/task-agent.png", label: "No Known Remediation", pos: "b", h: 96, constraint: "on" }
       F1 --> F3@{ img: "__ASSET__/assets/icons/launch-aap-job-template.png", label: "Notify Mattermost", pos: "b", h: 96, constraint: "on" }
       classDef noBorder fill:transparent,stroke:transparent
-      class A,B,P,Q,C,D1,D2,D3,E0,E1,E2,E3,F1,F3 noBorder
+      class A,K,B,P,Q,C,D1,D2,D3,E0,E1,E2,E3,F1,F3 noBorder
 
 - slug: disk-utilization
   title: Disk Utilization & Remediation
